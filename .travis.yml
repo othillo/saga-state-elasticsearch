@@ -1,9 +1,17 @@
 language: php
 
-php:
-  - 7.2
-  - 7.3
-  - 7.4
+jobs:
+  include:
+    - name: "Elasticsearch 1 + PHP 7.2"
+      php: "7.2"
+      env: ELASTICSEARCH_DOWNLOAD_URL=https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.6.deb
+    - name: "Elasticsearch 1 + PHP 7.3"
+      php: "7.3"
+      env: ELASTICSEARCH_DOWNLOAD_URL=https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.6.deb
+    - name: "Elasticsearch 1 + PHP 7.4"
+      php: "7.4"
+      env: ELASTICSEARCH_DOWNLOAD_URL=https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.6.deb
+  fast_finish: true
 
 services:
   - elasticsearch
@@ -11,7 +19,9 @@ services:
 before_install:
   # Disable XDebug speed up test execution.
   - phpenv config-rm xdebug.ini || return 0
-  - curl -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.6.deb && sudo dpkg -i --force-confnew elasticsearch-1.7.6.deb && sudo service elasticsearch restart
+  - curl ${ELASTICSEARCH_DOWNLOAD_URL} -o elasticsearch.deb
+  - sudo dpkg -i --force-confnew elasticsearch.deb
+  - sudo service elasticsearch restart
 
 install:
   - make dependencies
