@@ -40,15 +40,13 @@ class ElasticsearchRepository implements RepositoryInterface
 
     public function findOneBy(Criteria $criteria, string $sagaId): ?State
     {
-        $fields = array_merge($criteria->getComparisons(), ['done' => false]);
-
         $query = [
             'index' => $this->index,
             'type' => $sagaId,
             'body' => [
                 'query' => [
                     'bool' => [
-                        'must' => $this->buildFilter($fields),
+                        'must' => $this->buildFilter($criteria->getComparisons()),
                     ],
                 ],
             ],
@@ -87,8 +85,10 @@ class ElasticsearchRepository implements RepositoryInterface
         $retval = [];
 
         foreach ($filter as $field => $value) {
-            $retval[] = ['match' => [$field => $value]];
+            $retval[] = ['match' => ['values.'.$field => $value]];
         }
+
+        $retval[] = ['match' => ['done' => false]];
 
         return $retval;
     }
