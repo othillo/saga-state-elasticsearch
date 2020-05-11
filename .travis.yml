@@ -2,25 +2,23 @@ language: php
 
 jobs:
   include:
-    - name: "Elasticsearch 5 + PHP 7.2"
+    - name: "Elasticsearch 6 + PHP 7.2"
       php: "7.2"
-      env: ELASTICSEARCH_DOWNLOAD_URL=https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.16.deb
-    - name: "Elasticsearch 5 + PHP 7.3"
+      env: ELASTICSEARCH_DOWNLOAD_URL=https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.8.8.deb
+    - name: "Elasticsearch 6 + PHP 7.3"
       php: "7.3"
-      env: ELASTICSEARCH_DOWNLOAD_URL=https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.16.deb
-    - name: "Elasticsearch 5 + PHP 7.4"
+      env: ELASTICSEARCH_DOWNLOAD_URL=https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.8.8.deb
+    - name: "Elasticsearch 6 + PHP 7.4"
       php: "7.4"
-      env: ELASTICSEARCH_DOWNLOAD_URL=https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.16.deb
+      env: ELASTICSEARCH_DOWNLOAD_URL=https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.8.8.deb
   fast_finish: true
-
-services:
-  - elasticsearch
 
 before_install:
   # Disable XDebug speed up test execution.
   - phpenv config-rm xdebug.ini || return 0
   - curl ${ELASTICSEARCH_DOWNLOAD_URL} -o elasticsearch.deb
   - sudo dpkg -i --force-confnew elasticsearch.deb
+  - sudo chown -R elasticsearch:elasticsearch /etc/default/elasticsearch
   - sudo service elasticsearch restart
 
 install:
