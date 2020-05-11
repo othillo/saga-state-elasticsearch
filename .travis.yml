@@ -11,6 +11,15 @@ jobs:
     - name: "Elasticsearch 1 + PHP 7.4"
       php: "7.4"
       env: ELASTICSEARCH_DOWNLOAD_URL=https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.6.deb
+    - name: "Elasticsearch 2 + PHP 7.2"
+      php: "7.2"
+      env: ELASTICSEARCH_DOWNLOAD_URL=https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.4.6/elasticsearch-2.4.6.deb
+    - name: "Elasticsearch 2 + PHP 7.3"
+      php: "7.3"
+      env: ELASTICSEARCH_DOWNLOAD_URL=https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.4.6/elasticsearch-2.4.6.deb
+    - name: "Elasticsearch 2 + PHP 7.4"
+      php: "7.4"
+      env: ELASTICSEARCH_DOWNLOAD_URL=https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.4.6/elasticsearch-2.4.6.deb
   fast_finish: true
 
 services:

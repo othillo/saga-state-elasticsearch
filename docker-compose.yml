@@ -1,6 +1,6 @@
 version: '3.2'
 services:
   elasticsearch:
-    image: elasticsearch:1-alpine
+    image: elasticsearch:2-alpine
     ports:
       - "9200:9200"
