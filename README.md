@@ -12,3 +12,4 @@ Currently it only supports Elasticsearch versions 1 and 2.
 | 2                     | 0.1.*                                    |
 | 5                     | 0.2.*                                    |
 | 6                     | 0.3.*                                    |
+| 7                     | 0.4.*                                    |
